@@ -1,0 +1,27 @@
+<h1>Book Detail</h1>
+  <div>
+    <table>
+      <!--実データ-->
+      <tbody>
+        <tr>
+          <td>
+            <%= link_to root_path do %>
+              <%= image_tag("no_image.jpg") %></br>
+              ユーザー名（要変更）
+            <% end %>
+            </a>
+          </td>
+          <td><%= @book.title %></td>
+          <td><%= @book.body %></td>
+          <!--編集(edit)-->
+          <td></td>
+          <!--削除(destroy)-->
+          <td>
+            <% if @book.user == current_user %>
+              <%= link_to "削除",book_path(@book),method: :delete %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
