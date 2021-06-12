@@ -1,4 +1,14 @@
 class UsersController < ApplicationController
+  # コントローラの処理前に実行（editとupdateのみ）
+  before_action :ensure_current_user,{only:[:edit,:update]}
+  # bookのuser_idと、ログイン中のIDが異なる場合、book一覧にリダイレクトする
+  def ensure_current_user
+    @user = User.find(params[:id])
+    if @user.id != current_user.id
+      redirect_to users_path
+    end
+  end
+
   def new
     @book = Book.new
   end
@@ -9,11 +19,12 @@ class UsersController < ApplicationController
     @book.user_id = current_user.id
     @book.save
     redirect_to book_path(@book.id)
+    flash[:success]="You have created book successfully."
   end
 
   def index
     @users = User.all
-    # index内に投稿を置く場合、newが必要
+    # index内（ユーザー一覧）に投稿を置く場合、newが必要
     @book = Book.new
     @user = current_user
   end
@@ -22,6 +33,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # @userに紐付いたbooksのみを表示
     @books = @user.books
+    # show内（ユーザ詳細）に投稿を置く場合、newが必要
+    @book = Book.new
   end
 
   def edit
@@ -32,6 +45,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     redirect_to user_path(@user.id)
+    flash[:success] = "You have updated user successfully."
   end
 
   private

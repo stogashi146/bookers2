@@ -2,25 +2,16 @@
 ユーザー一覧ページ
 -->
 
-<!--プロフィール-->
-<h1>User info</h1>
-  <table>
-    <tr>
-      <td><%= attachment_image_tag @user,:profile_image,:fill,100,100,format:"jpeg",fallback:"no_image.jpg" %></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>name</td>
-      <td>introduction</td>
-    </tr>
-    <tr>
-      <td><%= @user.name %></td>
-      <td><%= @user.introduction %></td>
-    </tr>
-  </table>
-  <% if @user == current_user %>
-    <%= link_to "Edit User",edit_user_path(@user.id) %>
+<!--プロフィール（部分テンプレート）-->
+<%= render "users/userinfo",user:@user %>
+
+
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>error prohibited this obj from being saved:
+  <%= @book.errors.full_messages.each do |message| %>
+    <%= message %>
   <% end %>
+<% end %>
 
 <!--投稿フォーム-->
 <h1>New book</h1>
@@ -33,7 +24,7 @@
 <% end %>
 
 
-<!--投稿一覧-->
+<!--ユーザー一覧-->
   <div>
     <!--見出し-->
     <h1>Users</h1>
@@ -61,7 +52,7 @@
             </td>
 
             <td>
-               <%= link_to "Show",user_path(@user.id) %>
+               <%= link_to "Show",user_path(user.id) %>
             </td>
           </tr>
         </tbody>

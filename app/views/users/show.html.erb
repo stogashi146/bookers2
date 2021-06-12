@@ -2,25 +2,8 @@
 マイページ
 -->
 
-<!--プロフィール-->
-<h1>User info</h1>
-  <table>
-    <tr>
-      <td><%= attachment_image_tag @user,:profile_image,:fill,100,100,format:"jpeg",fallback:"no_image.jpg" %></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>name</td>
-      <td>introduction</td>
-    </tr>
-    <tr>
-      <td><%= @user.name %></td>
-      <td><%= @user.introduction %></td>
-    </tr>
-  </table>
-  <% if @user == current_user %>
-    <%= link_to "Edit User",edit_user_path(@user.id) %>
-  <% end %>
+<!--プロフィール（部分テンプレート）-->
+<%= render "users/userinfo",user:@user %>
 
 <!--投稿フォーム-->
 <h1>New book</h1>

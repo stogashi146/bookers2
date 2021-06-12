@@ -1,0 +1,20 @@
+<!--プロフィール-->
+<!--ここでの修正を最小限にするため、呼び出し元でローカル変数を定義している-->
+<h1>User info</h1>
+  <table>
+    <tr>
+      <td><%= attachment_image_tag user,:profile_image,:fill,100,100,format:"jpeg",fallback:"no_image.jpg" %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>introduction</td>
+    </tr>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.introduction %></td>
+    </tr>
+  </table>
+  <% if user == current_user %>
+    <%= link_to "Edit User",edit_user_path(user.id) %>
+  <% end %>
