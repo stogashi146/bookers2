@@ -25,8 +25,9 @@ class BooksController < ApplicationController
       redirect_to books_path
       flash[:success]="You have created book successfully."
     else
-      # render :index
-      # render partial: 'layouts/message'
+      @books=Book.all
+      @user = current_user
+      render :index
     end
   end
 
