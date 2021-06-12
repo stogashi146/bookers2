@@ -1,6 +1,10 @@
 <!--
 ユーザープロフィール編集
 -->
+
+<!--エラーメッセージ-->
+<%= render "users/error_message" %>
+
 <h2>User info</h2>
 <%= form_with model:@user,local:true do |f| %>
   <label for="inputName">Name</label>
