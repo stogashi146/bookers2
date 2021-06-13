@@ -4,6 +4,7 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -11,50 +12,82 @@
 
   <body>
     <header class="shadow-sm">
-      <nav class="navvar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a href="/">Books</a>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark container-fluid p-3">
+          <a href="/" class="navbar-brand pl-4">Bookers</a>
+          <button class="navbar-toggler"type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
           <!--ログイン済みならtrue、ログインしていなければfalse-->
           <% if user_signed_in? %>
             <!--ログイン中-->
-            <li>
-              <%= link_to "Home",user_path(current_user.id) %>
-            </li>
-            <li>
-              <%= link_to "Users",users_path %>
-            </li>
-            <li>
-              <%= link_to "Books",books_path %>
-            </li>
-            <li>
-              <%= link_to "logout",destroy_user_session_path,method: :delete %>
-            </li>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav  ml-auto">
+                <li class="nav-item">
+                  <%= link_to user_path(current_user.id),class:"nav-link text-white" do %>
+                    <i class="fas fa-home pr-1"></i>Home
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to users_path,class:"nav-link text-white" do %>
+                     <i class="fas fa-users pr-1"></i>Users
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to books_path,class:"nav-link text-white" do %>
+                    <i class="fas fa-book pr-1"></i>Books
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to destroy_user_session_path,method: :delete,class:"nav-link text-white" do %>
+                    <i class="fas fa-sign-out-alt pr-1"></i>logout
+                  <% end %>
+                </li>
+              </ul>
+            </div>
           <% else %>
             <!--ログインしていない-->
-            <li>
-              <%= link_to "Home",root_path %>
-            </li>
-            <li>
-              <%= link_to "About",about_path %>
-            </li>
-            <li>
-              <%= link_to "sign up",new_user_registration_path %>
-            </li>
-            <li>
-              <%= link_to "login",new_user_session_path %>
-            </li>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <%= link_to root_path,class:"nav-link text-white" do %>
+                    <i class="fas fa-home pr-1"></i>Home
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to about_path,class:"nav-link text-white" do %>
+                    <i class="fas fa-link" pr-1></i>About
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_registration_path,class:"nav-link text-white" do %>
+                    <i class="fas fa-user-plus pr-1"></i>sign up
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_session_path,class:"nav-link text-white" do %>
+                    <i class="fas fa-sign-in-alt pr-1"></i>login
+                  <% end %>
+                </li>
+              </ul>
+            </div>
           <% end %>
-        </div>  
       </nav>
     </header>
 
     <!--deviseメッセージ-->
-    <%= render 'layouts/message' %>
+
+    <span class="text-success"><%= render 'layouts/message' %></span>
 
     <%= yield %>
 
     <footer>
-      <small>CopyRight Infratop.inc</small>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 
