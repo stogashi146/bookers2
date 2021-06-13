@@ -15,14 +15,14 @@
  <%= f.text_field :title %>
  <h4>Option</h4>
  <%= f.text_area :body %>
- <%= f.submit "Create Book" %>
+ <%= f.submit "Create Book",class:"text-light btn btn-success" %>
 <% end %>
 
 <!--投稿一覧-->
   <div>
     <!--見出し-->
     <h1>Books</h1>
-    <table>
+    <table class="table table-striped">
       <!--テーブルのヘッダー-->
       <thead>
         <tr>
