@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def ensure_current_user
     @user = User.find(params[:id])
     if @user.id != current_user.id
-      redirect_to users_path
+      redirect_to user_path(current_user.id)
     end
   end
 

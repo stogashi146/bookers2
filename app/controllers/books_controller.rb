@@ -14,15 +14,14 @@ class BooksController < ApplicationController
     # @book = Book.new
   end
 
-  def about
-  end
+
 
   def create
     @book = Book.new(book_params)
     # booksのuser_idカラムは現在ログイン中のIDで保存する
     @book.user_id = current_user.id
     if @book.save
-      redirect_to books_path
+      redirect_to book_path(@book.id)
       flash[:success]="You have created book successfully."
     else
       @books=Book.all
